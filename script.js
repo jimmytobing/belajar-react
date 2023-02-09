@@ -93,13 +93,15 @@ function Game(props) {
     msg: 'Game Baru',
     history: [
       {
-        arrNine: [],
+        arrNine: ['X'],
       },
     ],
+    moves: null,
+    lompat: 0,
   });
 
   function handleClick(i) {
-    var hs = state.history;
+    var hs = state.history.slice(0, state.lompat + 1);
     var cr = hs[hs.length - 1];
     //------------------------------------
     var arr = cr.arrNine.slice();
@@ -121,7 +123,7 @@ function Game(props) {
     const mv = state.history.map((step, move) => {
       const desc = move ? 'Go to move #' + move : 'Go to game start';
       return (
-        <li>
+        <li key={move}>
           <button onClick={() => jumpTo(move)}>
             {desc + ' ==> ' + state.history[move].arrNine}
           </button>
@@ -140,13 +142,21 @@ function Game(props) {
         },
       ]),
       moves: mv,
+      lompat: hs.length,
+    });
+  }
+
+  function jumpTo(mv) {
+    setState({
+      lompat: mv,
+      xIsNext: mv % 2 === 0,
     });
   }
 
   return (
     <div>
       <Papan
-        arrNine={state.history[state.history.length - 1].arrNine}
+        arrNine={state.history[state.lompat].arrNine}
         onClick={props.onClick ? props.onClick : handleClick}
       />
       <h4 className="text-xl font-semibold">{state.msg}</h4>
