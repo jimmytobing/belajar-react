@@ -118,6 +118,17 @@ function Game(props) {
       newMsg = 'Pemenangnya ' + pemenang;
     }
 
+    const mv = state.history.map((step, move) => {
+      const desc = move ? 'Go to move #' + move : 'Go to game start';
+      return (
+        <li>
+          <button onClick={() => jumpTo(move)}>
+            {desc + ' ==> ' + state.history[move].arrNine}
+          </button>
+        </li>
+      );
+    });
+
     setState({
       //arrNine: arr,
       xIsNext: !state.xIsNext,
@@ -128,6 +139,7 @@ function Game(props) {
           arrNine: arr,
         },
       ]),
+      moves: mv,
     });
   }
 
@@ -138,6 +150,7 @@ function Game(props) {
         onClick={props.onClick ? props.onClick : handleClick}
       />
       <h4 className="text-xl font-semibold">{state.msg}</h4>
+      <ol>{state.moves}</ol>
     </div>
   );
 }
