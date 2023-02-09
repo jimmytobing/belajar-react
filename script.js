@@ -14,25 +14,35 @@ function Kotak(props) {
 }
 
 function Papan(props) {
-  const [state, setState] = React.useState({ nil: [], xIsNext: true, msg: '' });
+  const [state, setState] = React.useState({
+    nil: [],
+    xIsNext: true,
+    winner: null,
+    msg: 'Mulai Baru',
+  });
 
   function handleClick(i) {
     var arr = state.nil.slice();
-    var pemenang = calculateWinner(arr);
+
+    //bila sudah nemu winner, selesai
+    //atau kolom sudah berisi, jangan di isi lagi
+    if (state.winner || arr[i]) return;
+
+    arr[i] = state.xIsNext ? 'X' : 'O';
     var newMsg = state.xIsNext ? 'Next = O' : 'Next = X';
 
     //bila sudah nemu pemenang
+    var pemenang = calculateWinner(arr);
     if (pemenang) {
       newMsg = 'Pemenangnya ' + pemenang;
-      setState({ nil: arr, xIsNext: !state.xIsNext, msg: newMsg });
-      return;
     }
 
-    //bila kolom sudah berisi, jangan di isi lagi
-    if (arr[i]) return;
-
-    arr[i] = state.xIsNext ? 'X' : 'O';
-    setState({ nil: arr, xIsNext: !state.xIsNext, msg: newMsg });
+    setState({
+      nil: arr,
+      xIsNext: !state.xIsNext,
+      msg: newMsg,
+      winner: pemenang,
+    });
   }
 
   function calculateWinner(arr) {
