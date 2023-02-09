@@ -15,14 +15,14 @@ function Kotak(props) {
 
 function Papan(props) {
   const [state, setState] = React.useState({
-    nil: [],
+    arrNine: [],
     xIsNext: true,
     winner: null,
     msg: 'Mulai Baru',
   });
 
   function handleClick(i) {
-    var arr = state.nil.slice();
+    var arr = state.arrNine.slice();
 
     //bila sudah nemu winner, selesai
     //atau kolom sudah berisi, jangan di isi lagi
@@ -38,7 +38,7 @@ function Papan(props) {
     }
 
     setState({
-      nil: arr,
+      arrNine: arr,
       xIsNext: !state.xIsNext,
       msg: newMsg,
       winner: pemenang,
@@ -48,7 +48,9 @@ function Papan(props) {
   function peg(i) {
     return (
       <Kotak
-        value={props.onClick && props.nil ? props.nil[i] : state.nil[i]}
+        value={
+          props.onClick && props.arrNine ? props.arrNine[i] : state.arrNine[i]
+        }
         onClick={props.onClick ? () => props.onClick(i) : () => handleClick(i)}
       />
     );
@@ -65,7 +67,9 @@ function Papan(props) {
       <div className="flex justify-center">
         {peg(3)}
         <Kotak
-          value={props.onClick && props.nil ? props.nil[4] : state.nil[4]}
+          value={
+            props.onClick && props.arrNine ? props.arrNine[4] : state.arrNine[4]
+          }
           onClick={
             props.onClick ? () => props.onClick(4) : () => handleClick(4)
           }
@@ -82,16 +86,44 @@ function Papan(props) {
 }
 
 function Game(props) {
+  const [state, setState] = React.useState({
+    arrNine: [],
+    xIsNext: true,
+    winner: null,
+    msg: 'Game Baru',
+  });
+
   function handleClick(i) {
-    alert('Game ' + i);
+    var arr = state.arrNine.slice();
+
+    //bila sudah nemu winner, selesai
+    //atau kolom sudah berisi, jangan di isi lagi
+    if (state.winner || arr[i]) return;
+
+    arr[i] = state.xIsNext ? 'X' : 'O';
+    var newMsg = state.xIsNext ? 'Next = O' : 'Next = X';
+
+    //bila sudah nemu pemenang
+    var pemenang = calculateWinner(arr);
+    if (pemenang) {
+      newMsg = 'Pemenangnya ' + pemenang;
+    }
+
+    setState({
+      arrNine: arr,
+      xIsNext: !state.xIsNext,
+      msg: newMsg,
+      winner: pemenang,
+    });
   }
 
   return (
     <div>
       <Papan
-        nil={['A', 'B', 'C', , , , 'X', 'Y', 'Z']}
-        onClick2={props.onClick ? props.onClick : handleClick}
+        arrNine={state.arrNine}
+        onClick={props.onClick ? props.onClick : handleClick}
       />
+      <h4 className="text-xl font-semibold">{state.msg}</h4>
     </div>
   );
 }
