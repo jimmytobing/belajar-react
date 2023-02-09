@@ -137,15 +137,6 @@ function Game(props) {
     });
   }
 
-  function jumpTo2(mv) {
-    setState({
-      arrNine: state.history[mv].arrNine,
-
-      lompat: mv,
-    });
-    alert(mv);
-  }
-
   return (
     <div>
       <Papan
@@ -154,21 +145,30 @@ function Game(props) {
       />
       <h4 className="text-xl font-semibold">{state.msg}</h4>
       <ol>
-        {state.history.map((step, move) => {
-          const desc = move ? '#' + move : 'Game start';
-          return (
-            <li
-              key={move}
-              onClick={() => jumpTo(move)}
-              className="cursor-pointer"
-            >
-              {desc + ' ==> ' + state.history[move].arrNine}
-            </li>
-          );
+        {state.history.map((step, mov) => {
+          return <Timeline move={mov} onClick={jumpTo} />;
         })}
       </ol>
       <pre>{JSON.stringify(state, null, '   ')}</pre>
     </div>
+  );
+}
+
+function Timeline(props) {
+  const desc = props.move ? '#' + props.move : 'Game start';
+
+  function handleClick() {
+    alert('Timeline');
+  }
+
+  return (
+    <li
+      key={props.move}
+      className="cursor-pointer"
+      onClick={props.onClick ? () => props.onClick(props.move) : handleClick}
+    >
+      {desc}
+    </li>
   );
 }
 
