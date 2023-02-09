@@ -14,13 +14,14 @@ function Kotak(props) {
 }
 
 function Papan(props) {
-  const [state, setState] = React.useState({ nil: [], xIsNext: true });
+  const [state, setState] = React.useState({ nil: [], xIsNext: true, msg: '' });
 
   function handleClick(i) {
     var arr = state.nil.slice();
     if (!arr[i]) {
       arr[i] = state.xIsNext ? 'X' : 'O';
-      setState({ nil: arr, xIsNext: !state.xIsNext });
+      var newMsg = state.xIsNext ? 'Next = O' : 'Next = X';
+      setState({ nil: arr, xIsNext: !state.xIsNext, msg: newMsg });
     }
   }
 
@@ -30,6 +31,7 @@ function Papan(props) {
 
   return (
     <div>
+      <h4 className="text-xl font-semibold">{state.msg}</h4>
       <div className="flex justify-center">
         {peg(0)}
         {peg(1)}
@@ -56,7 +58,6 @@ function Game(props) {
 
   return (
     <div>
-      <h4 className="text-xl font-semibold">{props.value}</h4>
       <Papan />
     </div>
   );
