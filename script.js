@@ -45,29 +45,13 @@ function Papan(props) {
     });
   }
 
-  function calculateWinner(arr) {
-    const lines = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ];
-    for (let i = 0; i < lines.length; i++) {
-      const [a, b, c] = lines[i];
-      //jika a bukan null && a = b && a = c
-      if (arr[a] && arr[a] === arr[b] && arr[a] === arr[c]) {
-        return arr[a];
-      }
-    }
-    return null;
-  }
-
   function peg(i) {
-    return <Kotak value={state.nil[i]} onClick={() => handleClick(i)} />;
+    return (
+      <Kotak
+        value={props.nil ? props.nil[i] : state.nil[i]}
+        onClick={props.onClick ? props.onClick : () => handleClick(i)}
+      />
+    );
   }
 
   return (
@@ -93,15 +77,39 @@ function Papan(props) {
 }
 
 function Game(props) {
-  function handleClick() {
-    alert('Game');
+  function handleClick(i) {
+    alert('Game ' + i);
   }
 
   return (
     <div>
-      <Papan />
+      <Papan
+        value={props.value ? props.value : null}
+        onClick2={props.onClick ? props.onClick : () => handleClick(i)}
+      />
     </div>
   );
+}
+
+function calculateWinner(arr) {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    //jika a bukan null && a = b && a = c
+    if (arr[a] && arr[a] === arr[b] && arr[a] === arr[c]) {
+      return arr[a];
+    }
+  }
+  return null;
 }
 // ========================================
 
