@@ -91,7 +91,6 @@ function Game(props) {
     xIsNext: true,
     winner: null,
     msg: 'Game Baru',
-    lompat: 0,
     history: [
       {
         arrNine: [],
@@ -125,16 +124,23 @@ function Game(props) {
           arrNine: arr,
         },
       ]),
-      lompat: state.history.length,
     });
   }
 
   function jumpTo(mv) {
     setState({
       arrNine: state.history[mv].arrNine,
+      history: state.history.slice(0, mv + 1),
       xIsNext: mv % 2 === 0,
-      msg: 'newMsg',
+      msg: 'Rollback',
       winner: null,
+    });
+  }
+
+  function jumpTo2(mv) {
+    setState({
+      arrNine: state.history[mv].arrNine,
+
       lompat: mv,
     });
     alert(mv);
@@ -149,12 +155,14 @@ function Game(props) {
       <h4 className="text-xl font-semibold">{state.msg}</h4>
       <ol>
         {state.history.map((step, move) => {
-          const desc = move ? 'Go to move #' + move : 'Go to game start';
+          const desc = move ? '#' + move : 'Game start';
           return (
-            <li key={move}>
-              <button onClick={() => jumpTo(move)}>
-                {desc + ' ==> ' + state.history[move].arrNine}
-              </button>
+            <li
+              key={move}
+              onClick={() => jumpTo(move)}
+              className="cursor-pointer"
+            >
+              {desc + ' ==> ' + state.history[move].arrNine}
             </li>
           );
         })}
