@@ -14,14 +14,18 @@ function Kotak(props) {
 }
 
 function Papan(props) {
-  function handleClick() {
-    alert('Papan');
+  const [state, setState] = React.useState({ nil: [], xIsNext: true });
+
+  function handleClick(i) {
+    var arr = state.nil.slice();
+    if (!arr[i]) {
+      arr[i] = state.xIsNext ? 'X' : 'O';
+      setState({ nil: arr, xIsNext: !state.xIsNext });
+    }
   }
 
   function peg(i) {
-    return (
-      <Kotak value={i} onClick={props.onClick ? props.onClick : handleClick} />
-    );
+    return <Kotak value={state.nil[i]} onClick={() => handleClick(i)} />;
   }
 
   return (
