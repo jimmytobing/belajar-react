@@ -87,25 +87,20 @@ function Papan(props) {
 
 function Game(props) {
   const [state, setState] = React.useState({
-    //arrNine: [],
+    arrNine: [],
     xIsNext: true,
     winner: null,
     msg: 'Game Baru',
+    lompat: 0,
     history: [
       {
-        arrNine: ['X'],
+        arrNine: [],
       },
     ],
-    moves: null,
-    lompat: 0,
   });
 
   function handleClick(i) {
-    var hs = state.history.slice(0, state.lompat + 1);
-    var cr = hs[hs.length - 1];
-    //------------------------------------
-    var arr = cr.arrNine.slice();
-    //var arr = state.arrNine.slice();
+    var arr = state.arrNine.slice();
 
     //bila sudah nemu winner, selesai
     //atau kolom sudah berisi, jangan di isi lagi
@@ -120,47 +115,51 @@ function Game(props) {
       newMsg = 'Pemenangnya ' + pemenang;
     }
 
-    const mv = state.history.map((step, move) => {
-      const desc = move ? 'Go to move #' + move : 'Go to game start';
-      return (
-        <li key={move}>
-          <button onClick={() => jumpTo(move)}>
-            {desc + ' ==> ' + state.history[move].arrNine}
-          </button>
-        </li>
-      );
-    });
-
     setState({
-      //arrNine: arr,
+      arrNine: arr,
       xIsNext: !state.xIsNext,
       msg: newMsg,
       winner: pemenang,
-      history: hs.concat([
+      history: state.history.concat([
         {
           arrNine: arr,
         },
       ]),
-      moves: mv,
-      lompat: hs.length,
+      lompat: state.history.length,
     });
   }
 
   function jumpTo(mv) {
     setState({
-      lompat: mv,
+      arrNine: state.history[mv].arrNine,
       xIsNext: mv % 2 === 0,
+      msg: 'newMsg',
+      winner: null,
+      lompat: mv,
     });
+    alert(mv);
   }
 
   return (
     <div>
       <Papan
-        arrNine={state.history[state.lompat].arrNine}
+        arrNine={state.arrNine}
         onClick={props.onClick ? props.onClick : handleClick}
       />
       <h4 className="text-xl font-semibold">{state.msg}</h4>
-      <ol>{state.moves}</ol>
+      <ol>
+        {state.history.map((step, move) => {
+          const desc = move ? 'Go to move #' + move : 'Go to game start';
+          return (
+            <li key={move}>
+              <button onClick={() => jumpTo(move)}>
+                {desc + ' ==> ' + state.history[move].arrNine}
+              </button>
+            </li>
+          );
+        })}
+      </ol>
+      <pre>{JSON.stringify(state, null, '   ')}</pre>
     </div>
   );
 }
