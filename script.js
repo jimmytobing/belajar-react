@@ -87,14 +87,23 @@ function Papan(props) {
 
 function Game(props) {
   const [state, setState] = React.useState({
-    arrNine: [],
+    //arrNine: [],
     xIsNext: true,
     winner: null,
     msg: 'Game Baru',
+    history: [
+      {
+        arrNine: [],
+      },
+    ],
   });
 
   function handleClick(i) {
-    var arr = state.arrNine.slice();
+    var hs = state.history;
+    var cr = hs[hs.length - 1];
+    //------------------------------------
+    var arr = cr.arrNine.slice();
+    //var arr = state.arrNine.slice();
 
     //bila sudah nemu winner, selesai
     //atau kolom sudah berisi, jangan di isi lagi
@@ -110,17 +119,22 @@ function Game(props) {
     }
 
     setState({
-      arrNine: arr,
+      //arrNine: arr,
       xIsNext: !state.xIsNext,
       msg: newMsg,
       winner: pemenang,
+      history: hs.concat([
+        {
+          arrNine: arr,
+        },
+      ]),
     });
   }
 
   return (
     <div>
       <Papan
-        arrNine={state.arrNine}
+        arrNine={state.history[state.history.length - 1].arrNine}
         onClick={props.onClick ? props.onClick : handleClick}
       />
       <h4 className="text-xl font-semibold">{state.msg}</h4>
