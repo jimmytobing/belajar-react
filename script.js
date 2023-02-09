@@ -18,11 +18,42 @@ function Papan(props) {
 
   function handleClick(i) {
     var arr = state.nil.slice();
-    if (!arr[i]) {
-      arr[i] = state.xIsNext ? 'X' : 'O';
-      var newMsg = state.xIsNext ? 'Next = O' : 'Next = X';
+    var pemenang = calculateWinner(arr);
+    var newMsg = state.xIsNext ? 'Next = O' : 'Next = X';
+
+    //bila sudah nemu pemenang
+    if (pemenang) {
+      newMsg = 'Pemenangnya ' + pemenang;
       setState({ nil: arr, xIsNext: !state.xIsNext, msg: newMsg });
+      return;
     }
+
+    //bila kolom sudah berisi, jangan di isi lagi
+    if (arr[i]) return;
+
+    arr[i] = state.xIsNext ? 'X' : 'O';
+    setState({ nil: arr, xIsNext: !state.xIsNext, msg: newMsg });
+  }
+
+  function calculateWinner(arr) {
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      //jika a bukan null && a = b && a = c
+      if (arr[a] && arr[a] === arr[b] && arr[a] === arr[c]) {
+        return arr[a];
+      }
+    }
+    return null;
   }
 
   function peg(i) {
