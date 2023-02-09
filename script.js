@@ -48,8 +48,8 @@ function Papan(props) {
   function peg(i) {
     return (
       <Kotak
-        value={props.nil ? props.nil[i] : state.nil[i]}
-        onClick={props.onClick ? props.onClick : () => handleClick(i)}
+        value={props.onClick && props.nil ? props.nil[i] : state.nil[i]}
+        onClick={props.onClick ? () => props.onClick(i) : () => handleClick(i)}
       />
     );
   }
@@ -64,7 +64,12 @@ function Papan(props) {
       </div>
       <div className="flex justify-center">
         {peg(3)}
-        {peg(4)}
+        <Kotak
+          value={props.onClick && props.nil ? props.nil[4] : state.nil[4]}
+          onClick={
+            props.onClick ? () => props.onClick(4) : () => handleClick(4)
+          }
+        />
         {peg(5)}
       </div>
       <div className="flex justify-center">
@@ -84,8 +89,8 @@ function Game(props) {
   return (
     <div>
       <Papan
-        value={props.value ? props.value : null}
-        onClick2={props.onClick ? props.onClick : () => handleClick(i)}
+        nil={['A', 'B', 'C', , , , 'X', 'Y', 'Z']}
+        onClick2={props.onClick ? props.onClick : handleClick}
       />
     </div>
   );
