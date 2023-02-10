@@ -1,5 +1,5 @@
 # belajar-react
 
-Halaman Belajar ReactJs Jimmy
+Halaman Belajar Form ReactJs dari Jimmy
 
 [Edit on StackBlitz ⚡️](https://stackblitz.com/edit/web-platform-tte3xv)
