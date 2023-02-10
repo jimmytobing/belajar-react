@@ -28,6 +28,287 @@
     <script type="module" src="script.js"></script>
   </head>
   <body class="bg-slate-400">
+    <div
+      class="
+        m-1
+        flex
+        h-full
+        w-screen
+        items-center
+        justify-center
+        bg-white
+        dark:bg-slate-900
+      "
+    >
+      <div
+        class="
+          flex
+          w-full
+          max-w-screen-xl
+          transform
+          cursor-pointer
+          flex-col
+          justify-between
+          rounded-md
+          bg-opacity-75
+          p-6
+          text-slate-800
+          transition
+          duration-500
+          ease-in-out
+          hover:-translate-y-1 hover:bg-slate-100 hover:shadow-lg
+          dark:bg-slate-700 dark:bg-opacity-25 dark:text-slate-300
+          md:flex-row md:p-3
+        "
+      >
+        <!--1-->
+        <div class="flex w-full flex-row md:w-4/12">
+          <div class="relative flex flex-col">
+            <div
+              class="
+                flex
+                h-12
+                w-12
+                flex-shrink-0 flex-col
+                justify-center
+                rounded-full
+                bg-slate-200 bg-opacity-50
+                dark:bg-slate-600
+              "
+            >
+              <img
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&w=128&h=128&q=60&facepad=1.5"
+                class="
+                  z-10
+                  h-12
+                  w-12
+                  rounded-full
+                  object-cover
+                  shadow
+                  hover:shadow-xl
+                "
+                alt="Rocky Balboa"
+              />
+              <span class="absolute right-0 top-0 z-20 flex h-3 w-3">
+                <span
+                  class="
+                    absolute
+                    inline-flex
+                    h-full
+                    w-full
+                    animate-ping
+                    rounded-full
+                    bg-green-400
+                    opacity-75
+                  "
+                ></span>
+                <span
+                  class="relative inline-flex h-3 w-3 rounded-full bg-green-500"
+                ></span>
+              </span>
+            </div>
+          </div>
+
+          <div class="ml-4 self-center overflow-x-hidden">
+            <div
+              class="
+                w-full
+                truncate
+                text-xl
+                font-extrabold
+                leading-5
+                tracking-tight
+              "
+            >
+              Rocky Balboa
+            </div>
+            <div class="text-sm text-slate-500">Fayetteville, AR 72701</div>
+          </div>
+        </div>
+
+        <!--2 hidden -->
+        <div class="z-50 hidden w-1/12 self-center md:block">
+          <div class="flex flex-row justify-center">
+            <div
+              class="
+                relative
+                z-0
+                -ml-4
+                inline-flex
+                transition
+                duration-300
+                ease-in-out
+                hover:mr-3
+              "
+            >
+              <img
+                class="
+                  z-10
+                  h-9
+                  w-9
+                  rounded-full
+                  border-2 border-white
+                  object-cover
+                  shadow
+                  hover:shadow-xl
+                  dark:border-slate-800
+                "
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&w=128&h=128&q=60&facepad=1.5"
+                alt="Marilyn Monroe"
+              />
+              <span
+                class="
+                  absolute
+                  bottom-0
+                  right-0
+                  z-20
+                  h-3
+                  w-3
+                  rounded-full
+                  border-2 border-slate-200
+                  bg-green-400
+                  dark:border-slate-800
+                "
+              ></span>
+            </div>
+            <div
+              class="
+                relative
+                z-0
+                -ml-4
+                inline-flex
+                transition
+                duration-300
+                ease-in-out
+              "
+            >
+              <img
+                class="
+                  z-10
+                  h-9
+                  w-9
+                  rounded-full
+                  border-2 border-white
+                  object-cover
+                  shadow
+                  hover:shadow-xl
+                  dark:border-slate-800
+                "
+                src="https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&w=128&h=128&q=60&facepad=1.5"
+                alt="Salesperson"
+              />
+              <span
+                class="
+                  absolute
+                  bottom-0
+                  right-0
+                  z-20
+                  h-3
+                  w-3
+                  rounded-full
+                  border-2 border-slate-200
+                  bg-green-400
+                  dark:border-slate-800
+                "
+              ></span>
+            </div>
+          </div>
+        </div>
+
+        <!--3-->
+        <div class="w-full self-center pt-4 md:w-3/12 md:pt-0">
+          <div class="ml-1">
+            <div class="text-xl font-extrabold leading-5 tracking-tight">
+              Oct 20, 2022
+            </div>
+            <div class="text-sm text-slate-500">2 hours ago</div>
+          </div>
+        </div>
+
+        <!--4-->
+        <div class="w-full self-center pt-4 md:w-3/12 md:pt-0">
+          <div class="ml-1">
+            <div class="text-xl font-extrabold leading-5 tracking-tight">
+              <span class="align-middle">$1,234.56</span>
+              <span
+                class="
+                  ml-0
+                  rounded
+                  bg-green-600
+                  px-2
+                  py-1
+                  align-middle
+                  text-[8px]
+                  font-bold
+                  uppercase
+                  text-white
+                  lg:ml-2
+                "
+                >Paid</span
+              >
+            </div>
+            <div class="text-sm text-slate-500">Total Paid</div>
+          </div>
+        </div>
+
+        <!--5-->
+        <div
+          class="
+            w-full
+            self-center
+            px-1
+            pt-4
+            pb-2
+            md:w-2/12 md:px-0 md:pt-0 md:pb-0
+          "
+        >
+          <div class="text-base font-bold leading-4 tracking-tight">
+            This is great for short status messages
+          </div>
+          <div class="status-bars w-full pt-2">
+            <div class="flex flex-row md:pr-6">
+              <div class="max-w-6 h-1 w-1/5 rounded bg-green-500"></div>
+              <div class="max-w-6 ml-1 h-1 w-1/5 rounded bg-amber-500"></div>
+              <div
+                class="
+                  max-w-6
+                  ml-1
+                  h-1
+                  w-1/5
+                  rounded
+                  bg-slate-400 bg-opacity-25
+                  dark:bg-slate-600
+                "
+              ></div>
+              <div
+                class="
+                  max-w-6
+                  ml-1
+                  h-1
+                  w-1/5
+                  rounded
+                  bg-slate-400 bg-opacity-25
+                  dark:bg-slate-600
+                "
+              ></div>
+              <div
+                class="
+                  max-w-6
+                  ml-1
+                  h-1
+                  w-1/5
+                  rounded
+                  bg-slate-400 bg-opacity-25
+                  dark:bg-slate-600
+                "
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <!--End-->
+      </div>
+    </div>
     <div id="root"></div>
   </body>
 </html>
